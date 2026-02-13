@@ -14,7 +14,13 @@ export default function LeaderboardPage() {
   useEffect(() => {
     fetch('/api/leaderboard')
       .then((res) => res.json())
-      .then(setEntries)
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setEntries(data);
+        } else {
+          setEntries([]);
+        }
+      })
       .catch(() => setEntries([]))
       .finally(() => setLoading(false));
   }, []);
