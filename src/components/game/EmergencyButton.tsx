@@ -1,0 +1,29 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
+interface EmergencyButtonProps {
+  remainingCount: number;
+  canUse: boolean;
+  onUse: () => void;
+}
+
+export default function EmergencyButton({ remainingCount, canUse, onUse }: EmergencyButtonProps) {
+  return (
+    <motion.button
+      whileHover={canUse ? { scale: 1.05 } : undefined}
+      whileTap={canUse ? { scale: 0.95 } : undefined}
+      onClick={canUse ? onUse : undefined}
+      className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${
+        canUse
+          ? 'bg-warning/20 border-warning/50 text-warning hover:bg-warning/30'
+          : 'bg-white/5 border-white/10 text-white/30 cursor-not-allowed'
+      }`}
+      disabled={!canUse}
+    >
+      <span>🆘</span>
+      <span>비상 구제권 ({remainingCount}회 남음)</span>
+      {canUse && <span className="text-xs text-warning/70">(-300점)</span>}
+    </motion.button>
+  );
+}
