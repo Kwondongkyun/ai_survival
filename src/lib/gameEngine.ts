@@ -34,11 +34,8 @@ export function applyEmergency(stats: GameState['stats']): GameState['stats'] {
 }
 
 export function getScenarioForWeek(scenarios: Scenario[], week: number, usedIds: number[]): Scenario | null {
-  const available = scenarios.filter(
-    (s) => week >= s.weekRange[0] && week <= s.weekRange[1] && !usedIds.includes(s.id)
-  );
-  if (available.length === 0) return null;
-  return available[Math.floor(Math.random() * available.length)];
+  // 각 주차에 정확히 매핑되는 시나리오 반환 (weekRange는 [n, n] 형식)
+  return scenarios.find(s => s.weekRange[0] === week) || null;
 }
 
 export function calculateScore(week: number, stats: GameState['stats'], emergencyUsed: number): ScoreResult {
