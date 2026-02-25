@@ -16,8 +16,8 @@ export default function EmergencyButton({ remainingCount, canUse, onUse }: Emerg
       onClick={canUse ? onUse : undefined}
       className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${
         canUse
-          ? 'bg-warning/20 border-warning/50 text-warning hover:bg-warning/30'
-          : 'bg-white/5 border-white/10 text-white/30 cursor-not-allowed'
+          ? 'bg-warning/10 border-warning/40 text-warning hover:bg-warning/20'
+          : 'bg-ink/5 border-ink/10 text-ink/30 cursor-not-allowed'
       }`}
       disabled={!canUse}
     >

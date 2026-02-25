@@ -30,6 +30,8 @@ const initialState: GameState = {
   currentScenario: null,
   history: [],
   gameOverReason: null,
+  lowestStatEver: INITIAL_STAT_VALUE,
+  firstTenWeeksClean: true,
 };
 
 export const useGameStore = create<GameStore>((set, get) => ({
@@ -61,6 +63,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
       { week: state.week, scenarioId: state.currentScenario!.id, choiceId: choice.id },
     ];
 
+    const minStat = Math.min(newStats.satisfaction, newStats.budget, newStats.career, newStats.academic);
+    const lowestStatEver = Math.min(state.lowestStatEver, minStat);
+    const firstTenWeeksClean = state.week <= 10
+      ? state.firstTenWeeksClean && minStat >= 50
+      : state.firstTenWeeksClean;
+
     if (gameOverReason) {
       set({
         stats: newStats,
@@ -68,6 +76,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
         gameOverReason,
         phase: 'gameOver',
         currentScenario: null,
+        lowestStatEver,
+        firstTenWeeksClean,
       });
     } else if (state.week >= MAX_WEEKS) {
       set({
@@ -75,11 +85,15 @@ export const useGameStore = create<GameStore>((set, get) => ({
         history: newHistory,
         phase: 'victory',
         currentScenario: null,
+        lowestStatEver,
+        firstTenWeeksClean,
       });
     } else {
       set({
         stats: newStats,
         history: newHistory,
+        lowestStatEver,
+        firstTenWeeksClean,
       });
     }
   },

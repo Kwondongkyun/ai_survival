@@ -20,6 +20,7 @@ export default function GamePage() {
   const {
     phase, week, stats, currentScenario, emergencyCount, emergencyUsed,
     gameOverReason, makeChoice, useEmergency, nextWeek, getScore, nickname,
+    lowestStatEver, firstTenWeeksClean,
   } = store;
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function GamePage() {
     }
   };
 
-  const handleViewResult = async () => {
+  const handleViewResult = async (finalScore?: number) => {
     const score = getScore();
     try {
       await fetch('/api/leaderboard', {
@@ -50,7 +51,7 @@ export default function GamePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           nickname,
-          score: score.totalScore,
+          score: finalScore ?? score.totalScore,
           week,
           grade: score.grade,
         }),
@@ -67,10 +68,11 @@ export default function GamePage() {
   const score = getScore();
 
   return (
-    <div className="min-h-screen bg-yonam-dark px-4 py-6 max-w-lg mx-auto flex flex-col gap-4">
+    <div className="min-h-screen bg-gradient-to-b from-cherry-light to-background">
+    <div className="px-4 py-6 max-w-lg mx-auto flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <span className="text-sm text-white/60">{nickname} 학생회장</span>
-        <span className="text-sm font-bold text-lg-red">{score.totalScore.toLocaleString()}점</span>
+        <span className="text-sm text-ink/60">{nickname} 학생회장</span>
+        <span className="text-sm font-bold text-cherry">{score.totalScore.toLocaleString()}점</span>
       </div>
 
       <WeekCounter week={week} />
@@ -113,9 +115,14 @@ export default function GamePage() {
       {phase === 'victory' && (
         <VictoryOverlay
           score={score}
+          stats={stats}
+          emergencyUsed={emergencyUsed}
+          lowestStatEver={lowestStatEver}
+          firstTenWeeksClean={firstTenWeeksClean}
           onViewResult={handleViewResult}
         />
       )}
+    </div>
     </div>
   );
 }

@@ -27,9 +27,9 @@ export default function ChoiceButton({ choice, index, onSelect }: ChoiceButtonPr
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={() => onSelect(choice)}
-      className="w-full text-left bg-white/5 hover:bg-white/10 border border-white/10 hover:border-lg-red/50 rounded-xl p-4 transition-all cursor-pointer"
+      className="w-full text-left bg-white/70 hover:bg-white border border-petal hover:border-cherry rounded-xl p-4 transition-all cursor-pointer shadow-sm hover:shadow-md"
     >
-      <p className="text-sm font-medium mb-2 text-white">{choice.text}</p>
+      <p className="text-sm font-medium mb-2 text-ink">{choice.text}</p>
       <div className="flex flex-wrap gap-2">
         {effects.map(([key, value]) => {
           const stat = statLabels[key];
@@ -38,7 +38,7 @@ export default function ChoiceButton({ choice, index, onSelect }: ChoiceButtonPr
             <span
               key={key}
               className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full ${
-                isPositive ? 'bg-success/20 text-success' : 'bg-danger/20 text-danger'
+                isPositive ? 'bg-success/15 text-success' : 'bg-danger/15 text-danger'
               }`}
             >
               {stat.icon} {stat.name} {isPositive ? '+' : ''}{value}

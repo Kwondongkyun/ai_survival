@@ -25,7 +25,7 @@ export default function ProgressBar({ value, max, color = 'auto', className = ''
           <span>{Math.round(percentage)}%</span>
         </div>
       )}
-      <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
+      <div className="w-full h-3 bg-petal/50 rounded-full overflow-hidden">
         <motion.div
           className={`h-full rounded-full ${barColor}`}
           initial={{ width: 0 }}

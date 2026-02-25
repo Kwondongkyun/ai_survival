@@ -13,23 +13,23 @@ export default function WeekCounter({ week }: WeekCounterProps) {
   const seasonIcon = week <= 13 ? '🌸' : week <= 26 ? '☀️' : week <= 39 ? '🍂' : '❄️';
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-xl p-3">
+    <div className="bg-white/70 backdrop-blur-sm border border-petal rounded-xl p-3 shadow-sm">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <span>{seasonIcon}</span>
-          <span className="text-sm text-white/60">{season}학기</span>
+          <span className="text-sm text-ink/60">{season}학기</span>
         </div>
         <motion.span
           key={week}
           initial={{ scale: 1.3, color: '#FF6B8A' }}
-          animate={{ scale: 1, color: '#FFFFFF' }}
+          animate={{ scale: 1, color: '#2D1B69' }}
           className="text-lg font-bold"
         >
           {week}주차
         </motion.span>
-        <span className="text-sm text-white/40">/ {MAX_WEEKS}주</span>
+        <span className="text-sm text-ink/40">/ {MAX_WEEKS}주</span>
       </div>
-      <ProgressBar value={week} max={MAX_WEEKS} color="bg-yonam-blue" />
+      <ProgressBar value={week} max={MAX_WEEKS} color="bg-cherry" />
     </div>
   );
 }

@@ -39,7 +39,10 @@ export interface GameState {
   currentScenario: Scenario | null;
   history: { week: number; scenarioId: number; choiceId: string }[];
   gameOverReason: string | null;
+  lowestStatEver: number;
+  firstTenWeeksClean: boolean;
 }
+
 
 export interface ScoreResult {
   survivalBonus: number;

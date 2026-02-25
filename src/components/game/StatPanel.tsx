@@ -21,14 +21,14 @@ export default function StatPanel({ stats }: StatPanelProps) {
       {STAT_CONFIG.map((config, i) => (
         <motion.div
           key={config.id}
-          className={`bg-white/5 border rounded-xl p-3 ${
-            statValues[i] < 30 ? 'border-danger/50 animate-pulse' : 'border-white/10'
+          className={`bg-white/70 backdrop-blur-sm border rounded-xl p-3 shadow-sm ${
+            statValues[i] < 30 ? 'border-danger/50 animate-pulse' : 'border-petal'
           }`}
           layout
         >
           <div className="flex items-center gap-2 mb-2">
             <span className="text-lg">{config.icon}</span>
-            <span className="text-xs text-white/60">{config.name}</span>
+            <span className="text-xs text-ink/60">{config.name}</span>
             <span className={`ml-auto text-sm font-bold ${
               statValues[i] > 60 ? 'text-success' : statValues[i] > 30 ? 'text-warning' : 'text-danger'
             }`}>
