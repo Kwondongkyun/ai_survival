@@ -21,7 +21,7 @@ export default function WeekCounter({ week }: WeekCounterProps) {
         </div>
         <motion.span
           key={week}
-          initial={{ scale: 1.3, color: '#A50034' }}
+          initial={{ scale: 1.3, color: '#FF6B8A' }}
           animate={{ scale: 1, color: '#FFFFFF' }}
           className="text-lg font-bold"
         >

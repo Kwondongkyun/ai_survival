@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     const { rank } = await addLeaderboardEntry({
       nickname: String(nickname).slice(0, 10),
       score,
-      week: typeof week === 'number' ? Math.max(1, Math.min(52, week)) : 1,
+      week: typeof week === 'number' ? Math.max(1, Math.min(30, week)) : 1,
       grade: String(grade).slice(0, 20),
     });
 

@@ -17,7 +17,7 @@ export default function EventCard({ scenario }: EventCardProps) {
     >
       <div className="flex items-center gap-2 mb-3">
         <span className="text-2xl">⚡</span>
-        <h2 className="text-lg font-bold">{scenario.title}</h2>
+        <h2 className="text-lg font-bold text-white">{scenario.title}</h2>
       </div>
       <p className="text-sm text-white/70 leading-relaxed">{scenario.description}</p>
     </motion.div>

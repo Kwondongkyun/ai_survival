@@ -29,7 +29,7 @@ export default function ChoiceButton({ choice, index, onSelect }: ChoiceButtonPr
       onClick={() => onSelect(choice)}
       className="w-full text-left bg-white/5 hover:bg-white/10 border border-white/10 hover:border-lg-red/50 rounded-xl p-4 transition-all cursor-pointer"
     >
-      <p className="text-sm font-medium mb-2">{choice.text}</p>
+      <p className="text-sm font-medium mb-2 text-white">{choice.text}</p>
       <div className="flex flex-wrap gap-2">
         {effects.map(([key, value]) => {
           const stat = statLabels[key];

@@ -24,7 +24,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-yonam-dark border border-white/10 rounded-2xl p-6 mx-4 max-w-md w-full shadow-2xl"
+            className="bg-white border border-petal rounded-2xl p-6 mx-4 max-w-md w-full shadow-2xl shadow-cherry/10"
             onClick={(e) => e.stopPropagation()}
           >
             {children}

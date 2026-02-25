@@ -31,7 +31,7 @@ export default function VictoryOverlay({ score, onViewResult }: VictoryOverlayPr
           🎓
         </motion.div>
         <h2 className="text-2xl font-bold text-success mb-2">임기 완료!</h2>
-        <p className="text-sm text-white/60 mb-6">52주를 무사히 마쳤습니다!</p>
+        <p className="text-sm text-white/60 mb-6">30주를 무사히 마쳤습니다!</p>
 
         <div className="bg-white/5 rounded-xl p-4 mb-6 space-y-2 text-sm">
           <div className="flex justify-between"><span className="text-white/60">생존 보너스</span><span>+{score.survivalBonus.toLocaleString()}</span></div>
