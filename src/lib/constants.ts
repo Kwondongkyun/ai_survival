@@ -8,7 +8,7 @@ export const EMERGENCY_PENALTY = 300;
 export const STAT_CONFIG = [
   { id: 'satisfaction' as const, name: '학생 만족도', icon: '😊' },
   { id: 'budget' as const, name: '학교 예산', icon: '💰' },
-  { id: 'lgRelation' as const, name: 'LG 관계', icon: '🏢' },
+  { id: 'career' as const, name: '취업·진로 지원도', icon: '💼' },
   { id: 'academic' as const, name: '학업 분위기', icon: '📚' },
 ];
 

@@ -1,5 +1,5 @@
 export interface StatType {
-  id: 'satisfaction' | 'budget' | 'lgRelation' | 'academic';
+  id: 'satisfaction' | 'budget' | 'career' | 'academic';
   name: string;
   icon: string;
   value: number;
@@ -11,7 +11,7 @@ export interface Choice {
   effects: {
     satisfaction: number;
     budget: number;
-    lgRelation: number;
+    career: number;
     academic: number;
   };
 }
@@ -30,7 +30,7 @@ export interface GameState {
   stats: {
     satisfaction: number;
     budget: number;
-    lgRelation: number;
+    career: number;
     academic: number;
   };
   emergencyCount: number;

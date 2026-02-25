@@ -8,13 +8,13 @@ interface StatPanelProps {
   stats: {
     satisfaction: number;
     budget: number;
-    lgRelation: number;
+    career: number;
     academic: number;
   };
 }
 
 export default function StatPanel({ stats }: StatPanelProps) {
-  const statValues = [stats.satisfaction, stats.budget, stats.lgRelation, stats.academic];
+  const statValues = [stats.satisfaction, stats.budget, stats.career, stats.academic];
 
   return (
     <div className="grid grid-cols-2 gap-3">

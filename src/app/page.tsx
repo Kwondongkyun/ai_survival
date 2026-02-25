@@ -55,7 +55,7 @@ export default function LandingPage() {
           {[
             { icon: '😊', name: '학생 만족도' },
             { icon: '💰', name: '학교 예산' },
-            { icon: '🏢', name: 'LG 관계' },
+            { icon: '💼', name: '취업·진로 지원도' },
             { icon: '📚', name: '학업 분위기' },
           ].map((stat) => (
             <div key={stat.name} className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 flex items-center gap-2">

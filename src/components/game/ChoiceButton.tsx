@@ -12,7 +12,7 @@ interface ChoiceButtonProps {
 const statLabels: Record<string, { icon: string; name: string }> = {
   satisfaction: { icon: '😊', name: '만족도' },
   budget: { icon: '💰', name: '예산' },
-  lgRelation: { icon: '🏢', name: 'LG' },
+  career: { icon: '💼', name: '진로' },
   academic: { icon: '📚', name: '학업' },
 };
 

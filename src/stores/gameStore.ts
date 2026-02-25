@@ -21,7 +21,7 @@ const initialState: GameState = {
   stats: {
     satisfaction: INITIAL_STAT_VALUE,
     budget: INITIAL_STAT_VALUE,
-    lgRelation: INITIAL_STAT_VALUE,
+    career: INITIAL_STAT_VALUE,
     academic: INITIAL_STAT_VALUE,
   },
   emergencyCount: EMERGENCY_MAX,
