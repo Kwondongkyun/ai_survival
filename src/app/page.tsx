@@ -7,7 +7,7 @@ import { Heart, Wallet, Briefcase, BookOpen, Trophy, School, LucideIcon } from '
 import { useGameStore } from '@/stores/gameStore';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
-import CherryBlossom from '@/components/ui/CherryBlossom';
+import SeasonEffect from '@/components/ui/SeasonEffect';
 import { LeaderboardEntry } from '@/types/game';
 
 const INTRO_LINES = [
@@ -80,7 +80,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-cherry-light via-background to-white/80" />
-      <CherryBlossom />
+      <SeasonEffect season="spring" />
 
       {/* 데스크탑 플로팅 TOP5 - step 3에서만 */}
       <AnimatePresence>

@@ -8,6 +8,7 @@ import { canUseEmergency } from '@/lib/gameEngine';
 import { EMERGENCY_MAX, STAT_CONFIG } from '@/lib/constants';
 import StatPanel, { StatFloat } from '@/components/game/StatPanel';
 import WeekCounter from '@/components/game/WeekCounter';
+import SeasonEffect, { Season } from '@/components/ui/SeasonEffect';
 import EventCard from '@/components/game/EventCard';
 import ChoiceButton from '@/components/game/ChoiceButton';
 import EmergencyButton from '@/components/game/EmergencyButton';
@@ -33,6 +34,8 @@ export default function GamePage() {
   const minStat = Math.min(stats.satisfaction, stats.budget, stats.career, stats.academic);
   const isCrisis = minStat < 40;
   const isDanger = minStat < 20;
+
+  const season: Season = week <= 8 ? 'spring' : week <= 16 ? 'summer' : week <= 24 ? 'fall' : 'winter';
 
   useEffect(() => {
     if (!nickname) router.replace('/');
@@ -104,16 +107,21 @@ export default function GamePage() {
   const emergencyAvailable = canUseEmergency(stats, emergencyUsed, EMERGENCY_MAX);
   const score = getScore();
 
+  const bgClass = isDanger
+    ? 'bg-gradient-to-b from-red-200 to-[#FFF8F0]'
+    : isCrisis
+    ? 'bg-gradient-to-b from-red-100 to-[#FFF8F0]'
+    : season === 'spring'
+    ? 'bg-gradient-to-b from-pink-50 to-[#FFF8F0]'
+    : season === 'summer'
+    ? 'bg-gradient-to-b from-emerald-50 to-[#FFF8F0]'
+    : season === 'fall'
+    ? 'bg-gradient-to-b from-orange-50 to-[#FFF8F0]'
+    : 'bg-gradient-to-b from-blue-50 to-[#FFF8F0]';
+
   return (
-    <motion.div
-      className={`min-h-screen transition-colors duration-700 ${
-        isDanger
-          ? 'bg-gradient-to-b from-red-200 to-background'
-          : isCrisis
-          ? 'bg-gradient-to-b from-red-100 to-background'
-          : 'bg-gradient-to-b from-cherry-light to-background'
-      }`}
-    >
+    <motion.div className={`min-h-screen transition-colors duration-700 ${bgClass}`}>
+      {!isCrisis && <SeasonEffect season={season} />}
       {/* 위기 맥박 오버레이 */}
       {isCrisis && (
         <motion.div

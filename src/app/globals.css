@@ -49,3 +49,36 @@ body {
 .animate-petal-fall {
   animation: petal-fall linear infinite;
 }
+
+@keyframes leaf-fall {
+  0%   { transform: translateY(-30px) translateX(0) rotate(0deg);   opacity: 0; }
+  8%   { opacity: 0.75; }
+  50%  { transform: translateY(48vh) translateX(var(--sway-mid, 60px)) rotate(280deg); opacity: 0.6; }
+  92%  { opacity: 0.35; }
+  100% { transform: translateY(108vh) translateX(var(--sway-end, -40px)) rotate(560deg); opacity: 0; }
+}
+.animate-leaf-fall {
+  animation: leaf-fall linear infinite;
+}
+
+@keyframes snow-fall {
+  0%   { transform: translateY(-20px) translateX(0) rotate(0deg);   opacity: 0; }
+  10%  { opacity: 0.7; }
+  50%  { transform: translateY(48vh) translateX(var(--sway-mid, 15px)) rotate(180deg); opacity: 0.55; }
+  90%  { opacity: 0.35; }
+  100% { transform: translateY(108vh) translateX(var(--sway-end, -10px)) rotate(360deg); opacity: 0; }
+}
+.animate-snow-fall {
+  animation: snow-fall linear infinite;
+}
+
+@keyframes firefly-float {
+  0%   { transform: translateY(100vh) translateX(0) scale(1);   opacity: 0; }
+  15%  { opacity: 0.8; }
+  50%  { transform: translateY(40vh) translateX(var(--sway-mid, 30px)) scale(1.2); opacity: 0.6; }
+  85%  { opacity: 0.4; }
+  100% { transform: translateY(-20px) translateX(var(--sway-end, -20px)) scale(0.8); opacity: 0; }
+}
+.animate-firefly-float {
+  animation: firefly-float ease-in-out infinite;
+}
