@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Siren } from 'lucide-react';
 
 interface EmergencyButtonProps {
   remainingCount: number;
@@ -21,7 +22,7 @@ export default function EmergencyButton({ remainingCount, canUse, onUse }: Emerg
       }`}
       disabled={!canUse}
     >
-      <span>🆘</span>
+      <Siren size={16} strokeWidth={2} />
       <span>비상 구제권 ({remainingCount}회 남음)</span>
       {canUse && <span className="text-xs text-warning/70">(-300점)</span>}
     </motion.button>

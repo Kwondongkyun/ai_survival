@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { Trophy, Heart, Wallet, Briefcase, BookOpen, GraduationCap, LucideIcon } from 'lucide-react';
 import { ScoreResult, GameState } from '@/types/game';
 import Button from '@/components/ui/Button';
 import { checkAchievements, calcAchievementBonus, AchievementDef } from '@/lib/achievements';
@@ -15,20 +16,27 @@ interface VictoryOverlayProps {
   onViewResult: (finalScore?: number) => void;
 }
 
-function getEnding(stats: GameState['stats']): { icon: string; title: string; subtitle: string } | null {
+interface Ending {
+  Icon: LucideIcon;
+  iconClass: string;
+  title: string;
+  subtitle: string;
+}
+
+function getEnding(stats: GameState['stats']): Ending | null {
   const { satisfaction, budget, career, academic } = stats;
   if (satisfaction >= 75 && budget >= 75 && career >= 75 && academic >= 75)
-    return { icon: '🏆', title: '완벽한 균형의 리더', subtitle: '4가지 모든 영역에서 탁월한 리더십을 발휘했습니다' };
+    return { Icon: Trophy,    iconClass: 'text-yellow-500', title: '완벽한 균형의 리더',    subtitle: '4가지 모든 영역에서 탁월한 리더십을 발휘했습니다' };
 
   const max = Math.max(satisfaction, budget, career, academic);
   if (satisfaction === max && satisfaction >= 80)
-    return { icon: '💝', title: '학생들의 영웅', subtitle: '학생 만족도를 최고로 이끌며 모두의 사랑을 받았습니다' };
+    return { Icon: Heart,     iconClass: 'text-pink-500',   title: '학생들의 영웅',          subtitle: '학생 만족도를 최고로 이끌며 모두의 사랑을 받았습니다' };
   if (budget === max && budget >= 80)
-    return { icon: '💰', title: '재정 천재 학생회장', subtitle: '학생회 예산을 탄탄하게 관리했습니다' };
+    return { Icon: Wallet,    iconClass: 'text-green-500',  title: '재정 천재 학생회장',      subtitle: '학생회 예산을 탄탄하게 관리했습니다' };
   if (career === max && career >= 80)
-    return { icon: '💼', title: '취업률 신기록 달성자', subtitle: '취업·진로 지원을 최고 수준으로 끌어올렸습니다' };
+    return { Icon: Briefcase, iconClass: 'text-blue-500',   title: '취업률 신기록 달성자',    subtitle: '취업·진로 지원을 최고 수준으로 끌어올렸습니다' };
   if (academic === max && academic >= 80)
-    return { icon: '📚', title: '학업 분위기 수호자', subtitle: '학업 분위기를 최상으로 유지했습니다' };
+    return { Icon: BookOpen,  iconClass: 'text-purple-500', title: '학업 분위기 수호자',      subtitle: '학업 분위기를 최상으로 유지했습니다' };
 
   return null;
 }
@@ -37,12 +45,13 @@ export default function VictoryOverlay({
   score, stats, emergencyUsed, lowestStatEver, firstTenWeeksClean, onViewResult,
 }: VictoryOverlayProps) {
   const achievements: AchievementDef[] = useMemo(
-    () => checkAchievements({ stats, emergencyUsed, lowestStatEver, firstTenWeeksClean }, score),
+    () => checkAchievements({ stats, emergencyUsed, lowestStatEver, firstTenWeeksClean } as GameState, score),
     [],
   );
   const achievementBonus = calcAchievementBonus(achievements);
   const finalScore = score.totalScore + achievementBonus;
   const ending = getEnding(stats);
+  const DisplayIcon = ending?.Icon ?? GraduationCap;
 
   return (
     <motion.div
@@ -56,15 +65,18 @@ export default function VictoryOverlay({
         transition={{ delay: 0.2, type: 'spring' }}
         className="bg-white border border-success/30 rounded-2xl p-6 max-w-md w-full text-center shadow-xl max-h-[90vh] overflow-y-auto"
       >
-        {/* 엔딩 */}
+        {/* 엔딩 아이콘 */}
         <motion.div
-          initial={{ rotate: -10 }}
-          animate={{ rotate: [0, -10, 10, -5, 5, 0] }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-6xl mb-3"
+          initial={{ scale: 0.5, rotate: -15 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
+          className="flex justify-center mb-3"
         >
-          {ending ? ending.icon : '🎓'}
+          <div className="w-20 h-20 rounded-full bg-success/10 flex items-center justify-center">
+            <DisplayIcon size={40} className={ending?.iconClass ?? 'text-success'} strokeWidth={1.5} />
+          </div>
         </motion.div>
+
         <h2 className="text-xl font-bold text-success mb-1">
           {ending ? ending.title : '임기 완료!'}
         </h2>
@@ -82,8 +94,7 @@ export default function VictoryOverlay({
           )}
           {achievementBonus > 0 && (
             <div className="flex justify-between text-success font-medium">
-              <span>업적 보너스</span>
-              <span>+{achievementBonus.toLocaleString()}</span>
+              <span>업적 보너스</span><span>+{achievementBonus.toLocaleString()}</span>
             </div>
           )}
           <div className="border-t border-petal pt-2 flex justify-between font-bold text-lg">
@@ -94,7 +105,7 @@ export default function VictoryOverlay({
 
         <p className="text-base font-bold text-ink/70 mb-4">{score.grade}</p>
 
-        {/* 업적 목록 */}
+        {/* 업적 */}
         {achievements.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}

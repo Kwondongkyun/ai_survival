@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Flower2, Sun, Leaf, Snowflake, LucideIcon } from 'lucide-react';
 import { MAX_WEEKS } from '@/lib/constants';
 import ProgressBar from '@/components/ui/ProgressBar';
 
@@ -8,16 +9,23 @@ interface WeekCounterProps {
   week: number;
 }
 
+const SEASONS: { label: string; Icon: LucideIcon; color: string }[] = [
+  { label: '봄학기',  Icon: Flower2,   color: 'text-pink-400' },
+  { label: '여름학기', Icon: Sun,       color: 'text-yellow-400' },
+  { label: '가을학기', Icon: Leaf,      color: 'text-orange-400' },
+  { label: '겨울학기', Icon: Snowflake, color: 'text-blue-300' },
+];
+
 export default function WeekCounter({ week }: WeekCounterProps) {
-  const season = week <= 13 ? '봄' : week <= 26 ? '여름' : week <= 39 ? '가을' : '겨울';
-  const seasonIcon = week <= 13 ? '🌸' : week <= 26 ? '☀️' : week <= 39 ? '🍂' : '❄️';
+  const seasonIndex = week <= 13 ? 0 : week <= 26 ? 1 : week <= 39 ? 2 : 3;
+  const { label, Icon, color } = SEASONS[seasonIndex];
 
   return (
     <div className="bg-white/70 backdrop-blur-sm border border-petal rounded-xl p-3 shadow-sm">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
-          <span>{seasonIcon}</span>
-          <span className="text-sm text-ink/60">{season}학기</span>
+          <Icon size={16} className={color} strokeWidth={2} />
+          <span className="text-sm text-ink/60">{label}</span>
         </div>
         <motion.span
           key={week}

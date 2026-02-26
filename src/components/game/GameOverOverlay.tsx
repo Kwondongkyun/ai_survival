@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Skull } from 'lucide-react';
 import { ScoreResult } from '@/types/game';
 import Button from '@/components/ui/Button';
 
@@ -24,7 +25,11 @@ export default function GameOverOverlay({ reason, week, score, onViewResult }: G
         transition={{ delay: 0.2, type: 'spring' }}
         className="bg-white border border-danger/30 rounded-2xl p-6 max-w-md w-full text-center shadow-xl"
       >
-        <div className="text-6xl mb-4">💀</div>
+        <div className="flex justify-center mb-4">
+          <div className="w-16 h-16 rounded-full bg-danger/10 flex items-center justify-center">
+            <Skull size={32} className="text-danger" strokeWidth={1.5} />
+          </div>
+        </div>
         <h2 className="text-2xl font-bold text-danger mb-2">탄핵!</h2>
         <p className="text-sm text-ink/60 mb-4">{week}주차에 게임이 종료되었습니다</p>
         <p className="text-sm text-ink/80 bg-danger/8 rounded-lg p-3 mb-6">{reason}</p>
