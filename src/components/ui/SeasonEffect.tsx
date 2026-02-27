@@ -42,17 +42,41 @@ const SUMMER_COLORS = [
   "radial-gradient(ellipse at 50% 50%, #D9F99D 0%, #86EFAC 50%, #4ADE80 100%)",
 ];
 
-function makeParticles(count: number): Particle[] {
+function generateParticles(season: Season): Particle[] {
+  const count = season === "winter" ? 40 : season === "summer" ? 15 : 20;
   return Array.from({ length: count }, (_, i) => ({
     id: i,
     left: Math.random() * 105 - 2,
-    size: Math.random() * 10 + 6,
+    size:
+      season === "winter"
+        ? Math.random() * 16 + 12
+        : season === "summer"
+          ? Math.random() * 8 + 5
+          : Math.random() * 12 + 8,
     delay: Math.random() * 18,
-    duration: Math.random() * 8 + 10,
-    swayMid: (Math.random() - 0.5) * 100,
-    swayEnd: (Math.random() - 0.5) * 80,
+    duration:
+      season === "winter"
+        ? Math.random() * 10 + 14
+        : season === "summer"
+          ? Math.random() * 6 + 12
+          : Math.random() * 8 + 10,
+    swayMid:
+      season === "winter"
+        ? (Math.random() - 0.5) * 30
+        : season === "fall"
+          ? (Math.random() - 0.5) * 140
+          : (Math.random() - 0.5) * 100,
+    swayEnd:
+      season === "winter"
+        ? (Math.random() - 0.5) * 20
+        : season === "fall"
+          ? (Math.random() - 0.5) * 100
+          : (Math.random() - 0.5) * 80,
     initialRotate: Math.random() * 360,
-    colorStop: 0,
+    colorStop: Math.floor(
+      Math.random() *
+        (season === "winter" ? 4 : season === "fall" ? 5 : 3),
+    ),
   }));
 }
 
@@ -60,52 +84,8 @@ export default function SeasonEffect({ season = "spring" }: SeasonEffectProps) {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const count = season === "winter" ? 40 : season === "summer" ? 15 : 20;
-    setParticles(
-      Array.from({ length: count }, (_, i) => ({
-        id: i,
-        left:
-          season === "summer"
-            ? Math.random() * 105 - 2
-            : Math.random() * 105 - 2,
-        size:
-          season === "winter"
-            ? Math.random() * 16 + 12
-            : season === "summer"
-              ? Math.random() * 8 + 5
-              : Math.random() * 12 + 8,
-        delay: Math.random() * 18,
-        duration:
-          season === "winter"
-            ? Math.random() * 10 + 14
-            : season === "summer"
-              ? Math.random() * 6 + 12
-              : Math.random() * 8 + 10,
-        swayMid:
-          season === "winter"
-            ? (Math.random() - 0.5) * 30
-            : season === "fall"
-              ? (Math.random() - 0.5) * 140
-              : (Math.random() - 0.5) * 100,
-        swayEnd:
-          season === "winter"
-            ? (Math.random() - 0.5) * 20
-            : season === "fall"
-              ? (Math.random() - 0.5) * 100
-              : (Math.random() - 0.5) * 80,
-        initialRotate: Math.random() * 360,
-        colorStop: Math.floor(
-          Math.random() *
-            (season === "winter"
-              ? 4
-              : season === "fall"
-                ? 5
-                : season === "summer"
-                  ? 3
-                  : 3),
-        ),
-      })),
-    );
+    const id = setTimeout(() => setParticles(generateParticles(season)), 0);
+    return () => clearTimeout(id);
   }, [season]);
 
   const getColors = () => {

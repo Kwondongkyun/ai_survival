@@ -33,7 +33,7 @@ export function applyEmergency(stats: GameState['stats']): GameState['stats'] {
   };
 }
 
-export function getScenarioForWeek(scenarios: Scenario[], week: number, usedIds: number[]): Scenario | null {
+export function getScenarioForWeek(scenarios: Scenario[], week: number): Scenario | null {
   // 각 주차에 정확히 매핑되는 시나리오 반환 (weekRange는 [n, n] 형식)
   return scenarios.find(s => s.weekRange[0] === week) || null;
 }

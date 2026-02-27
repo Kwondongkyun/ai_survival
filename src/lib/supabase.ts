@@ -7,7 +7,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export async function testConnection() {
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('leaderboard_entries')
       .select('count')
       .limit(1);

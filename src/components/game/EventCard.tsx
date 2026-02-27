@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Zap } from 'lucide-react';
 import { Scenario } from '@/types/game';
@@ -14,6 +14,8 @@ const TYPING_SPEED = 22;
 
 export default function EventCard({ scenario, onTypingDone }: EventCardProps) {
   const [displayText, setDisplayText] = useState('');
+  const onTypingDoneRef = useRef(onTypingDone);
+  onTypingDoneRef.current = onTypingDone;
 
   useEffect(() => {
     setDisplayText('');
@@ -23,11 +25,11 @@ export default function EventCard({ scenario, onTypingDone }: EventCardProps) {
       setDisplayText(scenario.description.slice(0, i));
       if (i >= scenario.description.length) {
         clearInterval(timer);
-        onTypingDone?.();
+        onTypingDoneRef.current?.();
       }
     }, TYPING_SPEED);
     return () => clearInterval(timer);
-  }, [scenario.id]);
+  }, [scenario.description]);
 
   const isDone = displayText.length >= scenario.description.length;
 

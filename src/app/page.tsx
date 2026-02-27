@@ -30,11 +30,10 @@ function useTypewriterLines(lines: string[], speed = 40, active = true) {
   const [displayedLines, setDisplayedLines] = useState<string[]>([]);
   const [currentLine, setCurrentLine] = useState(0);
   const [currentText, setCurrentText] = useState('');
-  const [done, setDone] = useState(false);
 
   useEffect(() => {
     if (!active) return;
-    if (currentLine >= lines.length) { setDone(true); return; }
+    if (currentLine >= lines.length) return;
 
     const line = lines[currentLine];
     if (currentText.length < line.length) {
@@ -50,6 +49,7 @@ function useTypewriterLines(lines: string[], speed = 40, active = true) {
     }
   }, [currentLine, currentText, lines, speed, active]);
 
+  const done = currentLine >= lines.length;
   return { displayedLines, currentText, currentLine, done };
 }
 

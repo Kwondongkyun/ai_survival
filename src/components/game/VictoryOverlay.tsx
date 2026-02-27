@@ -1,11 +1,10 @@
 'use client';
 
-import { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, Heart, Wallet, Briefcase, BookOpen, GraduationCap, LucideIcon } from 'lucide-react';
 import { ScoreResult, GameState } from '@/types/game';
 import Button from '@/components/ui/Button';
-import { checkAchievements, calcAchievementBonus, AchievementDef } from '@/lib/achievements';
+import { checkAchievements, calcAchievementBonus } from '@/lib/achievements';
 
 interface VictoryOverlayProps {
   score: ScoreResult;
@@ -44,9 +43,9 @@ function getEnding(stats: GameState['stats']): Ending | null {
 export default function VictoryOverlay({
   score, stats, emergencyUsed, lowestStatEver, firstTenWeeksClean, onViewResult,
 }: VictoryOverlayProps) {
-  const achievements: AchievementDef[] = useMemo(
-    () => checkAchievements({ stats, emergencyUsed, lowestStatEver, firstTenWeeksClean } as GameState, score),
-    [],
+  const achievements = checkAchievements(
+    { stats, emergencyUsed, lowestStatEver, firstTenWeeksClean } as GameState,
+    score,
   );
   const achievementBonus = calcAchievementBonus(achievements);
   const finalScore = score.totalScore + achievementBonus;

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Trophy, Inbox, Medal } from 'lucide-react';
-import Button from '@/components/ui/Button';
 import { LeaderboardEntry } from '@/types/game';
 
 export default function LeaderboardPage() {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion';
 import { useGameStore } from '@/stores/gameStore';
@@ -29,7 +29,6 @@ export default function GamePage() {
   const [choicesVisible, setChoicesVisible] = useState(false);
   const [statFloats, setStatFloats] = useState<StatFloat[]>([]);
   const [scope, animate] = useAnimate();
-  const prevStatsRef = useRef(stats);
 
   const minStat = Math.min(stats.satisfaction, stats.budget, stats.career, stats.academic);
   const isCrisis = minStat < 40;

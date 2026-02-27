@@ -42,8 +42,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   startGame: () => {
     const week = 1;
-    const usedIds: number[] = [];
-    const scenario = getScenarioForWeek(scenarios, week, usedIds);
+    const scenario = getScenarioForWeek(scenarios, week);
     set({
       ...initialState,
       nickname: get().nickname,
@@ -117,8 +116,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       return;
     }
 
-    const usedIds = state.history.map((h) => h.scenarioId);
-    const scenario = getScenarioForWeek(scenarios, nextWeek, usedIds);
+    const scenario = getScenarioForWeek(scenarios, nextWeek);
 
     set({
       week: nextWeek,
