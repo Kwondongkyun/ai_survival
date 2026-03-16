@@ -131,6 +131,9 @@ export default function VictoryOverlay({
         <Button size="lg" className="w-full rounded-full" onClick={() => onViewResult(finalScore)}>
           결과 등록
         </Button>
+        <p className="text-[10px] text-ink/25 mt-4">
+          본 게임의 시나리오는 생성형 AI(Claude Opus 4.6)를 활용하여 제작되었습니다
+        </p>
       </motion.div>
     </motion.div>
   );
