@@ -153,10 +153,6 @@ export default function LandingPage() {
               >
                 게임 시작
               </Button>
-
-              <p className="text-[10px] text-ink/25 text-center">
-                본 게임의 시나리오는 생성형 AI(Claude Opus 4.6)를 활용하여 제작되었습니다
-              </p>
             </motion.div>
           )}
 

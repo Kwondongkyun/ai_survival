@@ -50,6 +50,9 @@ export default function EventCard({ scenario, onTypingDone }: EventCardProps) {
           <span className="inline-block w-0.5 h-3.5 bg-ink/50 animate-pulse ml-0.5 align-middle" />
         )}
       </p>
+      <p className="text-[10px] text-right mt-2" style={{ color: '#7BB8D0' }}>
+        이 스토리는 생성형 AI(Claude Opus 4.6)로 제작되었습니다
+      </p>
     </motion.div>
   );
 }
